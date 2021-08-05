@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://demosc.chinaz.net/Files/pic/icons/8166/b9.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://demosc.chinaz.net/Files/pic/icons/8166/b9.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="GUI 已经不太怎么使用了，但是还是需要了解一些基本的基础知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaGUI基础知识">
+<meta property="og:url" content="http://example.com/2021/08/03/Java/JavaGUI%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="记录园">
+<meta property="og:description" content="GUI 已经不太怎么使用了，但是还是需要了解一些基本的基础知识。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214233821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214258358.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214324667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214341692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214357835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214412401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214434809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214455741.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214509118.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214530419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214556821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214615803.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214630405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214655129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214711425.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214730110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214758468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214817858.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214835214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200801214851513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2021-08-03T00:45:37.000Z">
+<meta property="article:modified_time" content="2021-08-03T00:45:37.000Z">
+<meta property="article:author" content="小李">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200801214233821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center">
+
+<link rel="canonical" href="http://example.com/2021/08/03/Java/JavaGUI%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaGUI基础知识 | 记录园</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+		<a target="_blank" rel="noopener" href="https://github.com/lishisen-code" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">记录园</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">小李的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/03/Java/JavaGUI%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img2.baidu.com/it/u=325567737,3478266281&fm=26&fmt=auto&gp=0.jpg">
+      <meta itemprop="name" content="小李">
+      <meta itemprop="description" content="实践出真知">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="记录园">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaGUI基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-03 08:45:37" itemprop="dateCreated datePublished" datetime="2021-08-03T08:45:37+08:00">2021-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              
+<span title="post.wordcount">
+    3.2k 字
+</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+<span title="post.min2read">
+    17 分钟
+</span>            </span>
+
+          <!--
+            <div class="post-description">GUI 已经不太怎么使用了，但是还是需要了解一些基本的基础知识。</div>
+		  -->
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>Gui的核心技术：Swing AWT</p>
+<pre><code>1. 界面不太美观
+2. 需要jre环境
+</code></pre>
+<p>为什么学？</p>
+<pre><code>1. 可以写出自己想要的一些小工具
+2. 工作需要swing界面维护，使用概率很小
+3. 了解MVC架构，了解监听
+</code></pre>
+<h2 id="2-AWT"><a href="#2-AWT" class="headerlink" title="2.AWT"></a>2.AWT</h2><h3 id="2-1-Awt-介绍"><a href="#2-1-Awt-介绍" class="headerlink" title="2.1 Awt 介绍"></a>2.1 Awt 介绍</h3><ol>
+<li><p>包含了很多类和接口   </p>
+</li>
+<li><p>元素：窗口、按钮、文本框</p>
+</li>
+<li><p>java.awt包</p>
+<p><img src="https://img-blog.csdnimg.cn/20200801214233821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center" alt="&lt;img src=&quot;C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200731170347773.png&quot; alt=&quot;image-20200731170347773&quot; style=&quot;zoom:50%;&quot; /&gt;"></p>
+</li>
+</ol>
+<h3 id="2-2组件和容器"><a href="#2-2组件和容器" class="headerlink" title="2.2组件和容器"></a>2.2组件和容器</h3><h4 id="1-Frame"><a href="#1-Frame" class="headerlink" title="1. Frame"></a>1. Frame</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">//GUI的第一个界面</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFrame</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Frame</span></span><br><span class="line">        Frame frame = <span class="keyword">new</span> Frame(<span class="string">&quot;我的第一个Java图像界面窗口&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//需要设置可见性</span></span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置窗口大小</span></span><br><span class="line">        frame.setSize(<span class="number">400</span>,<span class="number">400</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置背景颜色</span></span><br><span class="line">        frame.setBackground(Color.GREEN);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//弹出的初始位置</span></span><br><span class="line">        frame.setLocation(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置大小固定</span></span><br><span class="line">        frame.setResizable(<span class="keyword">false</span>);<span class="comment">//默认true，可以改变</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行效果图</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20200801214258358.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center" alt="&lt;img src=&quot;C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200731171746791.png&quot; alt=&quot;image-20200731171746791&quot; style=&quot;zoom:67%;&quot; /&gt;"></p>
+<ul>
+<li><strong>上面的代码的封装：</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFrame2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//展示多个窗口</span></span><br><span class="line">        MyFrame myFrame1 = <span class="keyword">new</span> MyFrame(<span class="number">100</span>,<span class="number">500</span>,<span class="number">200</span>,<span class="number">200</span>,Color.blue);</span><br><span class="line">        MyFrame myFrame2 = <span class="keyword">new</span> MyFrame(<span class="number">300</span>,<span class="number">500</span>,<span class="number">200</span>,<span class="number">200</span>,Color.yellow);</span><br><span class="line">        MyFrame myFrame3 = <span class="keyword">new</span> MyFrame(<span class="number">100</span>,<span class="number">700</span>,<span class="number">200</span>,<span class="number">200</span>,Color.red);</span><br><span class="line">        MyFrame myFrame4 = <span class="keyword">new</span> MyFrame(<span class="number">300</span>,<span class="number">700</span>,<span class="number">200</span>,<span class="number">200</span>,Color.MAGENTA);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFrame</span> <span class="keyword">extends</span> <span class="title">Frame</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> id = <span class="number">0</span>;<span class="comment">//可能存在多个窗口，计数器</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyFrame</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> w,<span class="keyword">int</span> h,Color color)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="string">&quot;MyFrame+&quot;</span>+(++id));</span><br><span class="line">        setBackground(color);</span><br><span class="line">        setBounds(x,y,w,h);</span><br><span class="line">        setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214324667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center" alt="&lt;img src=&quot;C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200731173037241.png&quot; alt=&quot;image-20200731173037241&quot; style=&quot;zoom:67%;&quot; /&gt;"></p>
+<h4 id="2-Panel-面板"><a href="#2-Panel-面板" class="headerlink" title="2. Panel(面板)"></a>2. Panel(面板)</h4><p>解决了关闭事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowEvent;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Panel 可以看成是一个空间，但是不能单独存在</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPanel</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Frame frame = <span class="keyword">new</span> Frame();</span><br><span class="line">        <span class="comment">//布局的概念</span></span><br><span class="line">        Panel panel = <span class="keyword">new</span> Panel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置布局</span></span><br><span class="line">        frame.setLayout(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//坐标</span></span><br><span class="line">        frame.setBounds(<span class="number">300</span>,<span class="number">300</span>,<span class="number">500</span>,<span class="number">500</span>);</span><br><span class="line">        frame.setBackground(<span class="keyword">new</span> Color(<span class="number">40</span>,<span class="number">161</span>,<span class="number">35</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//panel设置坐标，相对于frame</span></span><br><span class="line">        panel.setBounds(<span class="number">50</span>,<span class="number">50</span>,<span class="number">400</span>,<span class="number">400</span>);</span><br><span class="line">        panel.setBackground(<span class="keyword">new</span> Color(<span class="number">193</span>,<span class="number">15</span>,<span class="number">60</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//frame.add(panel)</span></span><br><span class="line">        frame.add(panel);</span><br><span class="line"></span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//监听事件，监听窗口关闭时间，System.exit(0）</span></span><br><span class="line">        frame.addWindowListener(<span class="keyword">new</span> WindowAdapter() &#123;</span><br><span class="line">            <span class="comment">//窗口点击关闭的时候需要做的事情</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//结束程序</span></span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214341692.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center" alt="&lt;img src=&quot;C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200731174724356.png&quot; alt=&quot;image-20200731174724356&quot; style=&quot;zoom:67%;&quot; /&gt;"></p>
+<h4 id="3-布局管理器"><a href="#3-布局管理器" class="headerlink" title="3.布局管理器"></a>3.布局管理器</h4><ul>
+<li><p><strong>流式布局</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFlowLayout</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Frame frame = <span class="keyword">new</span> Frame();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//组建 按钮</span></span><br><span class="line">        Button button1 = <span class="keyword">new</span> Button(<span class="string">&quot;button1&quot;</span>);</span><br><span class="line">        Button button2 = <span class="keyword">new</span> Button(<span class="string">&quot;button2&quot;</span>);</span><br><span class="line">        Button button3 = <span class="keyword">new</span> Button(<span class="string">&quot;button3&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置为流式布局</span></span><br><span class="line">        frame.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));<span class="comment">//靠左</span></span><br><span class="line">        <span class="comment">//frame.setLayout(new FlowLayout(FlowLayout.RIGHT));//靠右</span></span><br><span class="line"></span><br><span class="line">        frame.setSize(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把按钮添加上去</span></span><br><span class="line">        frame.add(button1);</span><br><span class="line">        frame.add(button2);</span><br><span class="line">        frame.add(button3);</span><br><span class="line"></span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214357835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+</li>
+</ul>
+<ul>
+<li><strong>东西南北中</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestBorderLayout</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Frame frame = <span class="keyword">new</span> Frame(<span class="string">&quot;TestBorderLayout&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Button east = <span class="keyword">new</span> Button(<span class="string">&quot;East&quot;</span>);</span><br><span class="line">        Button west = <span class="keyword">new</span> Button(<span class="string">&quot;West&quot;</span>);</span><br><span class="line">        Button south = <span class="keyword">new</span> Button(<span class="string">&quot;south&quot;</span>);</span><br><span class="line">        Button north = <span class="keyword">new</span> Button(<span class="string">&quot;north&quot;</span>);</span><br><span class="line">        Button center = <span class="keyword">new</span> Button(<span class="string">&quot;center&quot;</span>);</span><br><span class="line"></span><br><span class="line">        frame.add(east,BorderLayout.EAST);</span><br><span class="line">        frame.add(west,BorderLayout.WEST);</span><br><span class="line">        frame.add(south,BorderLayout.SOUTH);</span><br><span class="line">        frame.add(north,BorderLayout.NORTH);</span><br><span class="line">        frame.add(center,BorderLayout.CENTER);</span><br><span class="line"></span><br><span class="line">        frame.setSize(<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214412401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li><strong>表格布局</strong> (Grid)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestGridLayout</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Frame frame = <span class="keyword">new</span> Frame(<span class="string">&quot;TestGridLayout&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Button btn1 = <span class="keyword">new</span> Button(<span class="string">&quot;btn1&quot;</span>);</span><br><span class="line">        Button btn2 = <span class="keyword">new</span> Button(<span class="string">&quot;btn2&quot;</span>);</span><br><span class="line">        Button btn3 = <span class="keyword">new</span> Button(<span class="string">&quot;btn3&quot;</span>);</span><br><span class="line">        Button btn4= <span class="keyword">new</span> Button(<span class="string">&quot;btn4&quot;</span>);</span><br><span class="line">        Button btn5 = <span class="keyword">new</span> Button(<span class="string">&quot;btn5&quot;</span>);</span><br><span class="line">        Button btn6 = <span class="keyword">new</span> Button(<span class="string">&quot;btn6&quot;</span>);</span><br><span class="line"></span><br><span class="line">        frame.setLayout(<span class="keyword">new</span> GridLayout(<span class="number">3</span>,<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">        frame.add(btn1);</span><br><span class="line">        frame.add(btn2);</span><br><span class="line">        frame.add(btn3);</span><br><span class="line">        frame.add(btn4);</span><br><span class="line">        frame.add(btn5);</span><br><span class="line">        frame.add(btn6);</span><br><span class="line"></span><br><span class="line">        frame.pack();<span class="comment">//Java函数  自动排列</span></span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214434809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<p><strong>总结：</strong></p>
+<pre><code>1. Frame是一个顶级窗口
+2. Panel无法单独显示，必须添加到某个容器中
+3. 布局管理器
+    1. 流式
+       2. 东西南北中
+       3. 表格
+4. 大小，定位，背景颜色，监听
+</code></pre>
+<h4 id="2-3-事件监听"><a href="#2-3-事件监听" class="headerlink" title="2.3. 事件监听"></a>2.3. 事件监听</h4><p><strong>事件监听：</strong>当某个事情发生的时候，干什么？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowEvent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestActionEvent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//按下按钮，触发一些事件</span></span><br><span class="line">        Frame frame = <span class="keyword">new</span> Frame();</span><br><span class="line">        Button button = <span class="keyword">new</span> Button();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//因为，addActionListener()需要ActionListener，所以我们需要构造一个ActionListener</span></span><br><span class="line">        MyActionLister myActionLister = <span class="keyword">new</span> MyActionLister();</span><br><span class="line">        button.addActionListener(myActionLister);</span><br><span class="line"></span><br><span class="line">        frame.add(button,BorderLayout.CENTER);</span><br><span class="line">        frame.pack();</span><br><span class="line">        windowClose(frame);<span class="comment">//关闭窗口</span></span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭窗体的事件</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">windowClose</span><span class="params">(Frame frame)</span></span>&#123;</span><br><span class="line">        frame.addWindowListener(<span class="keyword">new</span> WindowAdapter() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyActionLister</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;aaaaa&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>文本框监听事件</strong></p>
+<p>当文本框输入内容后 按 Enter键后控制台输出文本框的内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowEvent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestText01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//启动</span></span><br><span class="line">        MyFrame myFrame = <span class="keyword">new</span> MyFrame();</span><br><span class="line">        windowClose(myFrame);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//关闭窗口的事件</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">windowClose</span><span class="params">(Frame frame)</span></span>&#123;</span><br><span class="line">        frame.addWindowListener(<span class="keyword">new</span> WindowAdapter() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFrame</span> <span class="keyword">extends</span> <span class="title">Frame</span></span>&#123;</span><br><span class="line">    Frame frame = <span class="keyword">new</span> Frame();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyFrame</span><span class="params">()</span></span>&#123;</span><br><span class="line">        TextField textField = <span class="keyword">new</span> TextField();</span><br><span class="line">        add(textField);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//监听这个文本框输入的文字</span></span><br><span class="line">        MyActionListner myActionListner = <span class="keyword">new</span> MyActionListner();</span><br><span class="line">        <span class="comment">//按下Enter触发事件</span></span><br><span class="line">        textField.addActionListener(myActionListner);</span><br><span class="line">        pack();</span><br><span class="line">        setVisible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyActionListner</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">        TextField field = (TextField) e.getSource();<span class="comment">//获得一些资源  返回一个对象</span></span><br><span class="line">        System.out.println(field.getText());<span class="comment">//获得文本框中的文本</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214455741.png#pic_center"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200801214509118.png#pic_center"></p>
+<h4 id="2-4-画笔-paint"><a href="#2-4-画笔-paint" class="headerlink" title="2.4 画笔(paint)"></a>2.4 画笔(paint)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPaint</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MyPaint().loadFrame();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPaint</span> <span class="keyword">extends</span> <span class="title">Frame</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadFrame</span><span class="params">()</span></span>&#123;</span><br><span class="line">        setBounds(<span class="number">200</span>,<span class="number">200</span>,<span class="number">600</span>,<span class="number">500</span>);</span><br><span class="line">        setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//画笔</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span>&#123;</span><br><span class="line">        <span class="comment">//画笔需要有颜色，可以画画</span></span><br><span class="line">        <span class="comment">//g.setColor(Color.red);</span></span><br><span class="line">        g.drawOval(<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">        g.fillOval(<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>);<span class="comment">//实心圆</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//g.setColor(Color.GREEN);</span></span><br><span class="line">        g.fillRect(<span class="number">150</span>,<span class="number">200</span>,<span class="number">200</span>,<span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//养成习惯，画笔用完，将他还原为最初的颜色</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-鼠标监听"><a href="#2-5-鼠标监听" class="headerlink" title="2.5 鼠标监听"></a>2.5 鼠标监听</h4><p>目的：实现鼠标画画</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.MouseAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.MouseEvent;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.ListIterator;</span><br><span class="line"></span><br><span class="line"><span class="comment">//鼠标监听事件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMouseListener</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MyFrame1(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//自己的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyFrame1</span> <span class="keyword">extends</span> <span class="title">Frame</span></span>&#123;</span><br><span class="line">    <span class="comment">//画画需要画笔，需要监听鼠标当前的位置，需要集合来存储这个点</span></span><br><span class="line">    ArrayList points;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyFrame1</span><span class="params">(String title)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(title);</span><br><span class="line">        setBounds(<span class="number">200</span>,<span class="number">200</span>,<span class="number">400</span>,<span class="number">300</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//存鼠标点击的点</span></span><br><span class="line">        points = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">//鼠标监听器，针对这个窗口</span></span><br><span class="line">        <span class="keyword">this</span>.addMouseListener(<span class="keyword">new</span> MyMouseListener());</span><br><span class="line"></span><br><span class="line">        setVisible(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span></span>&#123;</span><br><span class="line">        <span class="comment">//画画，监听鼠标的事件</span></span><br><span class="line">        Iterator Iterator = points.listIterator();</span><br><span class="line">        <span class="keyword">while</span>(Iterator.hasNext())&#123;</span><br><span class="line">            Point point = (Point) Iterator.next();</span><br><span class="line">            g.setColor(Color.BLUE);</span><br><span class="line">            g.fillOval(point.x,point.y,<span class="number">10</span>,<span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加一个点到界面上</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addPaint</span><span class="params">(Point point)</span></span>&#123;</span><br><span class="line">        points.add(point);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//适配器模式</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMouseListener</span> <span class="keyword">extends</span> <span class="title">MouseAdapter</span></span>&#123;</span><br><span class="line">        <span class="comment">//鼠标  按下，弹起，按住不放</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mousePressed</span><span class="params">(MouseEvent e)</span></span>&#123;</span><br><span class="line">            MyFrame1 myFrame1 = (MyFrame1) e.getSource();</span><br><span class="line">            <span class="comment">//点击的时候，产生一个点</span></span><br><span class="line">            myFrame1.addPaint(<span class="keyword">new</span> Point(e.getX(),e.getY()));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//每次点击鼠标都要重新画一遍</span></span><br><span class="line">            myFrame1.repaint();<span class="comment">//刷新</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214530419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h4 id="2-6-窗口监听"><a href="#2-6-窗口监听" class="headerlink" title="2.6 窗口监听"></a>2.6 窗口监听</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.WindowEvent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestWindow</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> WindowFrame();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WindowFrame</span> <span class="keyword">extends</span> <span class="title">Frame</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WindowFrame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        setBackground(Color.blue);</span><br><span class="line">        setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">        setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//addWindowFocusListener(new MyWindowListenter());</span></span><br><span class="line">        <span class="keyword">this</span>.addWindowListener(</span><br><span class="line">                <span class="comment">//匿名内部类</span></span><br><span class="line">                <span class="keyword">new</span> WindowAdapter() &#123;</span><br><span class="line">                    <span class="comment">//关闭窗口</span></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;windowClosing&quot;</span>);</span><br><span class="line">                        System.exit(<span class="number">0</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//激活窗口</span></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowActivated</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;windowActivated&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">MyWindowListenter</span> <span class="keyword">extends</span> <span class="title">WindowAdapter</span> </span>&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowClosing</span><span class="params">(WindowEvent e)</span> </span>&#123;</span><br><span class="line">                setVisible(<span class="keyword">false</span>);<span class="comment">//隐藏窗口，通过按钮隐藏窗口</span></span><br><span class="line">                System.exit(<span class="number">0</span>);<span class="comment">//正常退出</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-7-键盘监听"><a href="#2-7-键盘监听" class="headerlink" title="2.7 键盘监听"></a>2.7 键盘监听</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.KeyAdapter;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.KeyEvent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestKeyListener</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> KeyFrame();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KeyFrame</span> <span class="keyword">extends</span> <span class="title">Frame</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">KeyFrame</span><span class="params">()</span></span>&#123;</span><br><span class="line">        setBounds(<span class="number">1</span>,<span class="number">2</span>,<span class="number">300</span>,<span class="number">400</span>);</span><br><span class="line">        setVisible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.addKeyListener(<span class="keyword">new</span> KeyAdapter() &#123;</span><br><span class="line">            <span class="comment">//键盘按下</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">keyPressed</span><span class="params">(KeyEvent e)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//获得键盘按下的键是那个键</span></span><br><span class="line">                <span class="keyword">int</span> keyCode = e.getKeyCode();<span class="comment">//获得当前键盘的码</span></span><br><span class="line">                <span class="keyword">if</span> (keyCode == KeyEvent.VK_UP)&#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;你按下了上键&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Swing"><a href="#3-Swing" class="headerlink" title="3. Swing"></a>3. Swing</h2><h3 id="3-1-窗口，面板"><a href="#3-1-窗口，面板" class="headerlink" title="3.1 窗口，面板"></a>3.1 窗口，面板</h3><ul>
+<li><strong>JFrame</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mport javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JFrameDemo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//init()；初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        JFrame jframe = <span class="keyword">new</span> JFrame(<span class="string">&quot;这是一个JFrame窗口&quot;</span>);</span><br><span class="line">        jframe.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        jframe.setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">        jframe.setBackground(Color.cyan);</span><br><span class="line">        <span class="comment">//设置文字 JLable</span></span><br><span class="line">        JLabel label = <span class="keyword">new</span> JLabel(<span class="string">&quot;你好你好你好你好&quot;</span>);</span><br><span class="line"></span><br><span class="line">        jframe.add(label);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭事件</span></span><br><span class="line">        jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//建立一个窗口</span></span><br><span class="line">        <span class="keyword">new</span> JFrameDemo().init();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>标签居中</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JFrameDemo02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> MyJfram2().init();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyJfram2</span> <span class="keyword">extends</span> <span class="title">JFrame</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setBounds(<span class="number">10</span>,<span class="number">10</span>,<span class="number">200</span>,<span class="number">300</span>);</span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        JLabel label = <span class="keyword">new</span> JLabel(<span class="string">&quot;你好你好你好你好&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.add(label);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//让文本标签居中，设置水平对齐</span></span><br><span class="line">        label.setHorizontalAlignment(SwingConstants.CENTER);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获得一个容器</span></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line">        container.setBackground(Color.YELLOW);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214556821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<h3 id="3-2-弹窗-Dialog"><a href="#3-2-弹窗-Dialog" class="headerlink" title="3.2 弹窗(Dialog)"></a>3.2 弹窗(Dialog)</h3><p>用来被弹出，默认有关闭事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"></span><br><span class="line"><span class="comment">//主窗口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DialogDemo</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DialogDemo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">700</span>,<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//JFrame 放东西，容器</span></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line">        <span class="comment">//绝对布局</span></span><br><span class="line">        container.setLayout(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//按钮</span></span><br><span class="line">        JButton button = <span class="keyword">new</span> JButton(<span class="string">&quot;点击创建一个窗口&quot;</span>);<span class="comment">//创建</span></span><br><span class="line">        button.setBounds(<span class="number">30</span>,<span class="number">30</span>,<span class="number">200</span>,<span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//点击这个按钮的时候，弹出一个窗口</span></span><br><span class="line">        button.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//弹窗</span></span><br><span class="line">                <span class="keyword">new</span> MyDialogDemo();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        container.add(button);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> DialogDemo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//弹窗的窗口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDialogDemo</span> <span class="keyword">extends</span> <span class="title">JDialog</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDialogDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setBounds(<span class="number">100</span>,<span class="number">100</span>,<span class="number">500</span>,<span class="number">500</span>);</span><br><span class="line">        <span class="comment">//this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span></span><br><span class="line"></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line">        container.setLayout(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">        container.add(<span class="keyword">new</span> Label(<span class="string">&quot;你好你好你好&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-标签"><a href="#3-3-标签" class="headerlink" title="3.3 标签"></a>3.3 标签</h3><ul>
+<li><strong>Lable</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IconDemo</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">Icon</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> height;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IconDemo</span><span class="params">()</span></span>&#123;<span class="comment">//无参构造</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IconDemo</span><span class="params">(<span class="keyword">int</span> width,<span class="keyword">int</span> height)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.width = width;</span><br><span class="line">        <span class="keyword">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        IconDemo iconDemo = <span class="keyword">new</span> IconDemo(<span class="number">15</span>, <span class="number">15</span>);</span><br><span class="line">        <span class="comment">//图标放在标签上，也可以放在按钮上</span></span><br><span class="line">        JLabel label = <span class="keyword">new</span> JLabel(<span class="string">&quot;icontest&quot;</span>,iconDemo,SwingConstants.CENTER);</span><br><span class="line"></span><br><span class="line">        Container container = getContentPane();</span><br><span class="line">        container.add(label);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> IconDemo().init();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paintIcon</span><span class="params">(Component c, Graphics g, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        g.fillOval(x,y,width,height);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIconWidth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIconHeight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214615803.png#pic_center"></p>
+<h3 id="3-4-面板"><a href="#3-4-面板" class="headerlink" title="3.4 面板"></a>3.4 面板</h3><ul>
+<li><strong>JPanel</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JPanelDemo</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JPanelDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        container.setLayout(<span class="keyword">new</span> GridLayout(<span class="number">2</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">10</span>));<span class="comment">//后面参数是间距</span></span><br><span class="line"></span><br><span class="line">        JPanel panel1 = <span class="keyword">new</span> JPanel(<span class="keyword">new</span> GridLayout(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">        panel1.add(<span class="keyword">new</span> JButton(<span class="string">&quot;1&quot;</span>));</span><br><span class="line">        panel1.add(<span class="keyword">new</span> JButton(<span class="string">&quot;1&quot;</span>));</span><br><span class="line">        panel1.add(<span class="keyword">new</span> JButton(<span class="string">&quot;1&quot;</span>));</span><br><span class="line"></span><br><span class="line">        container.add(panel1);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> JPanelDemo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214630405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li><strong>JScorll (滚动条)</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JScrollDemo</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JScrollDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//文本域</span></span><br><span class="line">        JTextArea jTextArea = <span class="keyword">new</span> JTextArea(<span class="number">20</span>, <span class="number">50</span>);</span><br><span class="line">        jTextArea.setText(<span class="string">&quot;欢迎学习java.......&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Scroll面板</span></span><br><span class="line">        JScrollPane jScrollPane = <span class="keyword">new</span> JScrollPane();</span><br><span class="line">        container.add(jScrollPane);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">150</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> JScrollDemo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-按钮"><a href="#3-5-按钮" class="headerlink" title="3.5 按钮"></a>3.5 按钮</h3><ul>
+<li>普通按钮</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JButtonDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JButtonDemo01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        JButton button = <span class="keyword">new</span> JButton();</span><br><span class="line">        button.setToolTipText(<span class="string">&quot;按钮&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//add</span></span><br><span class="line">        container.add(button);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>, <span class="number">300</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> JButtonDemo01();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单选按钮</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JButtonDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JButtonDemo01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//单选框</span></span><br><span class="line">        JRadioButton jRadioBUtton1 = <span class="keyword">new</span> JRadioButton(<span class="string">&quot;JRadioBUtton1&quot;</span>);</span><br><span class="line">        JRadioButton jRadioBUtton2 = <span class="keyword">new</span> JRadioButton(<span class="string">&quot;JRadioBUtton2&quot;</span>);</span><br><span class="line">        JRadioButton jRadioBUtton3 = <span class="keyword">new</span> JRadioButton(<span class="string">&quot;JRadioBUtton3&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//由于单选框只能选择一个，分组</span></span><br><span class="line">        <span class="comment">//一个group中只能选择一个</span></span><br><span class="line">        ButtonGroup group = <span class="keyword">new</span> ButtonGroup();</span><br><span class="line">        group.add(jRadioBUtton1);</span><br><span class="line">        group.add(jRadioBUtton2);</span><br><span class="line">        group.add(jRadioBUtton3);</span><br><span class="line"></span><br><span class="line">        container.add(jRadioBUtton1, BorderLayout.CENTER);</span><br><span class="line">        container.add(jRadioBUtton2, BorderLayout.NORTH);</span><br><span class="line">        container.add(jRadioBUtton3, BorderLayout.SOUTH);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>, <span class="number">300</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> JButtonDemo01();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214655129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li>复选框</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JButtonDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JButtonDemo01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//多选框</span></span><br><span class="line">        JCheckBox checkBox01 = <span class="keyword">new</span> JCheckBox(<span class="string">&quot;checkBox01&quot;</span>);</span><br><span class="line">        JCheckBox checkBox02 = <span class="keyword">new</span> JCheckBox(<span class="string">&quot;checkBox02&quot;</span>);</span><br><span class="line"></span><br><span class="line">        container.add(checkBox01, BorderLayout.NORTH);</span><br><span class="line">        container.add(checkBox02, BorderLayout.SOUTH);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>, <span class="number">300</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> JButtonDemo01();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214711425.png#pic_center"></p>
+<h3 id="3-6-列表"><a href="#3-6-列表" class="headerlink" title="3.6 列表"></a>3.6 列表</h3><ul>
+<li>下拉框</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestComboboxDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestComboboxDemo01</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        JComboBox status = <span class="keyword">new</span> JComboBox();</span><br><span class="line"></span><br><span class="line">        status.addItem(<span class="keyword">null</span>);</span><br><span class="line">        status.addItem(<span class="string">&quot;正在上映&quot;</span>);</span><br><span class="line">        status.addItem(<span class="string">&quot;已下架&quot;</span>);</span><br><span class="line">        status.addItem(<span class="string">&quot;即将上映&quot;</span>);</span><br><span class="line"></span><br><span class="line">        container.add(status);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>, <span class="number">350</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> TestComboboxDemo01();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214730110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li>列表框</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestComboboxDemo02</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestComboboxDemo02</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成列表的内容</span></span><br><span class="line">        String[] contents = &#123;<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>&#125;;</span><br><span class="line">        <span class="comment">//列表中需要放入内容</span></span><br><span class="line">        JList jList = <span class="keyword">new</span> JList(contents);</span><br><span class="line">        container.add(jList);</span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>, <span class="number">350</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> TestComboboxDemo02();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214758468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li><p>应用场景</p>
+<p>1.选择地区，或者一些单个选项。</p>
+<p>列表就是用来展示信息，一般是动态扩容的。</p>
+</li>
+</ul>
+<h3 id="3-7-文本框"><a href="#3-7-文本框" class="headerlink" title="3.7 文本框"></a>3.7 文本框</h3><ul>
+<li>文本框</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.border.Border;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTextDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestTextDemo01</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        JTextField textField1 = <span class="keyword">new</span> JTextField(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        JTextField textField2 = <span class="keyword">new</span> JTextField(<span class="string">&quot;world&quot;</span>,<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">        container.add(textField1,BorderLayout.NORTH);</span><br><span class="line">        container.add(textField2,BorderLayout.SOUTH);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>,<span class="number">350</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> TestTextDemo01();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214817858.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li>密码框</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.border.Border;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTextDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestTextDemo01</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        JPasswordField jPasswordField = <span class="keyword">new</span> JPasswordField();</span><br><span class="line">        jPasswordField.setEchoChar(<span class="string">&#x27;*&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        container.add(jPasswordField);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>,<span class="number">350</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> TestTextDemo01();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214835214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<ul>
+<li>文本域</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.swing.*;</span><br><span class="line"><span class="keyword">import</span> javax.swing.border.Border;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestTextDemo01</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestTextDemo01</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Container container = <span class="keyword">this</span>.getContentPane();</span><br><span class="line"></span><br><span class="line">        JTextArea textArea = <span class="keyword">new</span> JTextArea(<span class="number">20</span>,<span class="number">50</span>);</span><br><span class="line">        textArea.setText(<span class="string">&quot;你好你好你好你好&quot;</span>);</span><br><span class="line"></span><br><span class="line">        container.add(textArea);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.setSize(<span class="number">500</span>,<span class="number">350</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> TestTextDemo01();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200801214851513.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DJ411B75F?p=1">本章知识点学习自</a></p>
+
+    </div>
+
+    
+    
+    
+
+
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+        <div class="reward-container">
+  <div>原创技术分享，您的支持将鼓励我继续创作</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    我愿意资助创作者
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="小李 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="小李 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>小李
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/03/Java/JavaGUI%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="JavaGUI基础知识">http://example.com/2021/08/03/Java/JavaGUI基础知识/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/03/Java/Java%E5%BC%82%E5%B8%B8%E7%9F%A5%E8%AF%86/" rel="prev" title="Java异常知识">
+      <i class="fa fa-chevron-left"></i> Java异常知识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/03/Java/Java%E4%B8%ADString%E7%B1%BB%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" rel="next" title="Java中String类常用方法">
+      Java中String类常用方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzY2OC8zMDE0MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-AWT"><span class="nav-text">2.AWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Awt-%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 Awt 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E7%BB%84%E4%BB%B6%E5%92%8C%E5%AE%B9%E5%99%A8"><span class="nav-text">2.2组件和容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Frame"><span class="nav-text">1. Frame</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Panel-%E9%9D%A2%E6%9D%BF"><span class="nav-text">2. Panel(面板)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-text">3.布局管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="nav-text">2.3. 事件监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-%E7%94%BB%E7%AC%94-paint"><span class="nav-text">2.4 画笔(paint)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-%E9%BC%A0%E6%A0%87%E7%9B%91%E5%90%AC"><span class="nav-text">2.5 鼠标监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-%E7%AA%97%E5%8F%A3%E7%9B%91%E5%90%AC"><span class="nav-text">2.6 窗口监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-%E9%94%AE%E7%9B%98%E7%9B%91%E5%90%AC"><span class="nav-text">2.7 键盘监听</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Swing"><span class="nav-text">3. Swing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%AA%97%E5%8F%A3%EF%BC%8C%E9%9D%A2%E6%9D%BF"><span class="nav-text">3.1 窗口，面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%BC%B9%E7%AA%97-Dialog"><span class="nav-text">3.2 弹窗(Dialog)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%A0%87%E7%AD%BE"><span class="nav-text">3.3 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E9%9D%A2%E6%9D%BF"><span class="nav-text">3.4 面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E6%8C%89%E9%92%AE"><span class="nav-text">3.5 按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E5%88%97%E8%A1%A8"><span class="nav-text">3.6 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-%E6%96%87%E6%9C%AC%E6%A1%86"><span class="nav-text">3.7 文本框</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小李"
+      src="https://img2.baidu.com/it/u=325567737,3478266281&fm=26&fmt=auto&gp=0.jpg">
+  <p class="site-author-name" itemprop="name">小李</p>
+  <div class="site-description" itemprop="description">实践出真知</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-envelope"></i>
+    1876419736@qq.com
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lishisen-code" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lishisen-code" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/m0_46219348?spm=1001.2100.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;m0_46219348?spm&#x3D;1001.2100.3001.5343" rel="noopener" target="_blank"><i class="fa fa-comment fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+		
+			<!-- canvas粒子时钟 -->
+			<div style="">
+  <canvas id="canvas" style="width:60%;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+        
+
+    </div>
+  </aside>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-fire"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">By Miss</span>
+
+<!--
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">230k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:29</span>
+--> 
+ 
+  
+</div>
+
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共72.3k字</span>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+ 不蒜子计数初始值纠正
+
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+
+-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/01/2021 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+  <script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
+
+<!--
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+-->
