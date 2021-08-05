@@ -2085,48 +2085,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java中的集合框架：HashMap</title>
-    <url>/2021/08/03/Java/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%EF%BC%9AHashMap/</url>
-    <content><![CDATA[<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><blockquote>
-<p>​        HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。实现了 Map 接口，根据键的 HashCode 值存储数据, 具有很快的访问速度，最多允许一条记录的键为 null，不支持线程同步；无序的，不会记录插入的顺序；集成了 AbstracMap ，实现了 Map、Cloneable、java.io.Serializable 接口；</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210201220656128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
-<ul>
-<li>HashMap 的 key 与 value 类型可以相同也可以不同的</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20210201220706190.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210201220714669.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
-<blockquote>
-<p>java.util.HashMap;    //包</p>
-<ul>
-<li>HshMap&lt;Integer, String&gt;() list= new HshMap&lt;Integer, String&gt;();</li>
-</ul>
-</blockquote>
-<ol>
-<li><p>添加元素，put(key,value) 方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    &#123;<span class="number">1</span>=aaaa, <span class="number">2</span>=bbbb&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>访问元素，get(key) 方法获取 key 对应的 value 值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        System.out.println(list.get(<span class="number">1</span>));</span><br><span class="line">        System.out.println(list.get(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    aaaa</span><br><span class="line">	bbbb</span><br></pre></td></tr></table></figure></li>
-<li><p>删除元素，remove(key)，删除 key 对应的键值对(key - value)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        list.remove(<span class="number">2</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    &#123;<span class="number">1</span>=aaaa&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>删除所有键值对，clear() 方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        list.remove(<span class="number">2</span>);</span><br><span class="line">        list.clear();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    &#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>计算大小，size() 方法计算 HashMap 中的元素数量</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        System.out.println(list.size());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    <span class="number">2</span></span><br></pre></td></tr></table></figure></li>
-<li><p>迭代集合，for-each</p>
-<p>通过 keySet() 方法获取key，然后通过 get(key) 获取对应的 value</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        <span class="comment">//通过 keySet 获取元素的 key</span></span><br><span class="line">        <span class="keyword">for</span> (Integer i : list.keySet()) &#123;</span><br><span class="line">            <span class="comment">//然后通过 get(key) 得到值输出</span></span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    aaaa</span><br><span class="line">	bbbb</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>更多常用 API 方法可以参考文档：<a href="https://www.matools.com/api/java8">https://www.matools.com/api/java8</a></strong></p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java中的集合框架：HashSet</title>
     <url>/2021/08/03/Java/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%EF%BC%9AHashSet/</url>
     <content><![CDATA[<h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><blockquote>
@@ -2161,73 +2119,38 @@
       </tags>
   </entry>
   <entry>
-    <title>Java中的集合框架：LinkedList</title>
-    <url>/2021/08/03/Java/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%EF%BC%9ALinkedList/</url>
-    <content><![CDATA[<h4 id="LinkedList-类"><a href="#LinkedList-类" class="headerlink" title="LinkedList 类"></a>LinkedList 类</h4><p>链表（LinkedList）是一种常见的基础数据结构，是一种线性表，但是并不是会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的地址。</p>
-<blockquote>
-<p>链表可以分为单向链表和双向链表：</p>
+    <title>Java中的集合框架：HashMap</title>
+    <url>/2021/08/03/Java/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%EF%BC%9AHashMap/</url>
+    <content><![CDATA[<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><blockquote>
+<p>​        HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。实现了 Map 接口，根据键的 HashCode 值存储数据, 具有很快的访问速度，最多允许一条记录的键为 null，不支持线程同步；无序的，不会记录插入的顺序；集成了 AbstracMap ，实现了 Map、Cloneable、java.io.Serializable 接口；</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210201220656128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
 <ul>
-<li><p>一个单向链表包含两个值，当前节点的值和一个指向下一个节点的链接</p>
-<p><img src="https://img-blog.csdnimg.cn/20210201214358343.png#pic_center"></p>
-</li>
+<li>HashMap 的 key 与 value 类型可以相同也可以不同的</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210201220706190.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210201220714669.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+<blockquote>
+<p>java.util.HashMap;    //包</p>
+<ul>
+<li>HshMap&lt;Integer, String&gt;() list= new HshMap&lt;Integer, String&gt;();</li>
 </ul>
 </blockquote>
-<blockquote>
-<ul>
-<li>一个双向链表有三个整数值：数值、向后的节点链接、向前的节点链接</li>
-</ul>
-<p> <img src="https://img-blog.csdnimg.cn/20210201214407887.png#pic_center"></p>
-</blockquote>
-<p>与 ArrayList 相似，是一种常用的数据容器。相比：LinkedList 的增加和删除对操作效率更高，而查找和删除的操作效率较低。</p>
-<p><strong>使用情况：ArrayList：</strong></p>
-<ul>
-<li>频繁访问列表中的某一个元素</li>
-<li>只需要在列表末尾进行添加和删除元素操作</li>
-</ul>
-<p><strong>使用情况：LinkedList：</strong></p>
-<ul>
-<li>需要通过循环迭代来访问列表中的某些元素</li>
-<li>需要频繁的在列表开头、中间、末尾等位置进行添加或删除元素操作</li>
-</ul>
-<blockquote>
-<p>LinkeList 继承了 AbstractSequentiaList 类</p>
-<p>实现了 Queue 接口，可以作为队列使用；实现了 List 接口，可以进行列表的相关操作；实现了 Deque 接口，可以作为队列使用；实现了 Cloneable 接口，可以实现克隆；实现了 java.io.Serializable 接口，支持序列化，能够通过序列化传输；</p>
-<p><img src="https://img-blog.csdnimg.cn/20210201214500930.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
-</blockquote>
-<blockquote>
-<p>在 java.util.LinkedList 包中</p>
-<ul>
-<li>LinkedList<E> list = new LinkedList<E>();    //创建方法</E></E></li>
-<li>LinkedList<E> list = new LinkedList(Collection&lt;? extends E&gt; c); // 使用集合创建链表</E></li>
-</ul>
-</blockquote>
-<h3 id="1-创建一个简单链表实例"><a href="#1-创建一个简单链表实例" class="headerlink" title="1. 创建一个简单链表实例"></a>1. 创建一个简单链表实例</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    []</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-添加元素"><a href="#2-添加元素" class="headerlink" title="2. 添加元素"></a>2. 添加元素</h3><ul>
-<li><strong>addFirst()，addLast()</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);	<span class="comment">//添加一个元素</span></span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);		<span class="comment">//在头部添加元素</span></span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);		<span class="comment">//在尾部添加元素</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    [one, two, three]</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-移除元素"><a href="#3-移除元素" class="headerlink" title="3. 移除元素"></a>3. 移除元素</h3><ul>
-<li><strong>removeFirst()，removeLast()</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        list.remove(<span class="number">1</span>);     <span class="comment">//移除一个元素</span></span><br><span class="line">        list.removeFirst();     <span class="comment">//移除头部元素</span></span><br><span class="line">        list.removeLast();      <span class="comment">//移除尾部元素</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    []</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-获取元素"><a href="#4-获取元素" class="headerlink" title="4. 获取元素"></a>4. 获取元素</h3><ul>
-<li><strong>getFirst()，getLast()</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        <span class="comment">//根据下标得到值输出</span></span><br><span class="line">        System.out.println(list.get(<span class="number">1</span>));</span><br><span class="line">        <span class="comment">//得到头部元素</span></span><br><span class="line">        System.out.println(list.getFirst());</span><br><span class="line">        <span class="comment">//得到尾部元素</span></span><br><span class="line">        System.out.println(list.getLast());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    two</span><br><span class="line">	one</span><br><span class="line">	three</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-迭代元素"><a href="#5-迭代元素" class="headerlink" title="5. 迭代元素"></a>5. 迭代元素</h3><ol>
-<li><strong>使用 for 和 size()</strong> </li>
+<ol>
+<li><p>添加元素，put(key,value) 方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    &#123;<span class="number">1</span>=aaaa, <span class="number">2</span>=bbbb&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>访问元素，get(key) 方法获取 key 对应的 value 值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        System.out.println(list.get(<span class="number">1</span>));</span><br><span class="line">        System.out.println(list.get(<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    aaaa</span><br><span class="line">	bbbb</span><br></pre></td></tr></table></figure></li>
+<li><p>删除元素，remove(key)，删除 key 对应的键值对(key - value)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        list.remove(<span class="number">2</span>);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    &#123;<span class="number">1</span>=aaaa&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除所有键值对，clear() 方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        list.remove(<span class="number">2</span>);</span><br><span class="line">        list.clear();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    &#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>计算大小，size() 方法计算 HashMap 中的元素数量</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        System.out.println(list.size());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    <span class="number">2</span></span><br></pre></td></tr></table></figure></li>
+<li><p>迭代集合，for-each</p>
+<p>通过 keySet() 方法获取key，然后通过 get(key) 获取对应的 value</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建 HashMap 对象</span></span><br><span class="line">        HashMap&lt;Integer, String&gt; list = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="comment">//向对象中添加键值对</span></span><br><span class="line">        list.put(<span class="number">1</span>,<span class="string">&quot;aaaa&quot;</span>);</span><br><span class="line">        list.put(<span class="number">2</span>,<span class="string">&quot;bbbb&quot;</span>);</span><br><span class="line">        <span class="comment">//通过 keySet 获取元素的 key</span></span><br><span class="line">        <span class="keyword">for</span> (Integer i : list.keySet()) &#123;</span><br><span class="line">            <span class="comment">//然后通过 get(key) 得到值输出</span></span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    aaaa</span><br><span class="line">	bbbb</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        <span class="comment">//通过 size() 方法计算链表大小</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果:</span><br><span class="line">	one</span><br><span class="line">	two</span><br><span class="line">	three</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><strong>通过 fro-each</strong> </li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (String s : list) &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果:</span><br><span class="line">	one</span><br><span class="line">	two</span><br><span class="line">	three</span><br></pre></td></tr></table></figure>
-
 <p><strong>更多常用 API 方法可以参考文档：<a href="https://www.matools.com/api/java8">https://www.matools.com/api/java8</a></strong></p>
 ]]></content>
       <categories>
@@ -2403,6 +2326,83 @@
 <p><a href="https://www.bilibili.com/video/BV12J41137hu?p=21">本章知识点学习自</a></p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java中的集合框架：LinkedList</title>
+    <url>/2021/08/03/Java/Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%EF%BC%9ALinkedList/</url>
+    <content><![CDATA[<h4 id="LinkedList-类"><a href="#LinkedList-类" class="headerlink" title="LinkedList 类"></a>LinkedList 类</h4><p>链表（LinkedList）是一种常见的基础数据结构，是一种线性表，但是并不是会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的地址。</p>
+<blockquote>
+<p>链表可以分为单向链表和双向链表：</p>
+<ul>
+<li><p>一个单向链表包含两个值，当前节点的值和一个指向下一个节点的链接</p>
+<p><img src="https://img-blog.csdnimg.cn/20210201214358343.png#pic_center"></p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>一个双向链表有三个整数值：数值、向后的节点链接、向前的节点链接</li>
+</ul>
+<p> <img src="https://img-blog.csdnimg.cn/20210201214407887.png#pic_center"></p>
+</blockquote>
+<p>与 ArrayList 相似，是一种常用的数据容器。相比：LinkedList 的增加和删除对操作效率更高，而查找和删除的操作效率较低。</p>
+<p><strong>使用情况：ArrayList：</strong></p>
+<ul>
+<li>频繁访问列表中的某一个元素</li>
+<li>只需要在列表末尾进行添加和删除元素操作</li>
+</ul>
+<p><strong>使用情况：LinkedList：</strong></p>
+<ul>
+<li>需要通过循环迭代来访问列表中的某些元素</li>
+<li>需要频繁的在列表开头、中间、末尾等位置进行添加或删除元素操作</li>
+</ul>
+<blockquote>
+<p>LinkeList 继承了 AbstractSequentiaList 类</p>
+<p>实现了 Queue 接口，可以作为队列使用；实现了 List 接口，可以进行列表的相关操作；实现了 Deque 接口，可以作为队列使用；实现了 Cloneable 接口，可以实现克隆；实现了 java.io.Serializable 接口，支持序列化，能够通过序列化传输；</p>
+<p><img src="https://img-blog.csdnimg.cn/20210201214500930.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjE5MzQ4,size_16,color_FFFFFF,t_70#pic_center"></p>
+</blockquote>
+<blockquote>
+<p>在 java.util.LinkedList 包中</p>
+<ul>
+<li>LinkedList<E> list = new LinkedList<E>();    //创建方法</E></E></li>
+<li>LinkedList<E> list = new LinkedList(Collection&lt;? extends E&gt; c); // 使用集合创建链表</E></li>
+</ul>
+</blockquote>
+<h3 id="1-创建一个简单链表实例"><a href="#1-创建一个简单链表实例" class="headerlink" title="1. 创建一个简单链表实例"></a>1. 创建一个简单链表实例</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    []</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-添加元素"><a href="#2-添加元素" class="headerlink" title="2. 添加元素"></a>2. 添加元素</h3><ul>
+<li><strong>addFirst()，addLast()</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);	<span class="comment">//添加一个元素</span></span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);		<span class="comment">//在头部添加元素</span></span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);		<span class="comment">//在尾部添加元素</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    [one, two, three]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-移除元素"><a href="#3-移除元素" class="headerlink" title="3. 移除元素"></a>3. 移除元素</h3><ul>
+<li><strong>removeFirst()，removeLast()</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        list.remove(<span class="number">1</span>);     <span class="comment">//移除一个元素</span></span><br><span class="line">        list.removeFirst();     <span class="comment">//移除头部元素</span></span><br><span class="line">        list.removeLast();      <span class="comment">//移除尾部元素</span></span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    []</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-获取元素"><a href="#4-获取元素" class="headerlink" title="4. 获取元素"></a>4. 获取元素</h3><ul>
+<li><strong>getFirst()，getLast()</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        <span class="comment">//根据下标得到值输出</span></span><br><span class="line">        System.out.println(list.get(<span class="number">1</span>));</span><br><span class="line">        <span class="comment">//得到头部元素</span></span><br><span class="line">        System.out.println(list.getFirst());</span><br><span class="line">        <span class="comment">//得到尾部元素</span></span><br><span class="line">        System.out.println(list.getLast());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">    two</span><br><span class="line">	one</span><br><span class="line">	three</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-迭代元素"><a href="#5-迭代元素" class="headerlink" title="5. 迭代元素"></a>5. 迭代元素</h3><ol>
+<li><strong>使用 for 和 size()</strong> </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        <span class="comment">//通过 size() 方法计算链表大小</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果:</span><br><span class="line">	one</span><br><span class="line">	two</span><br><span class="line">	three</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>通过 fro-each</strong> </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">&quot;two&quot;</span>);</span><br><span class="line">        list.addFirst(<span class="string">&quot;one&quot;</span>);</span><br><span class="line">        list.addLast(<span class="string">&quot;three&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (String s : list) &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果:</span><br><span class="line">	one</span><br><span class="line">	two</span><br><span class="line">	three</span><br></pre></td></tr></table></figure>
+
+<p><strong>更多常用 API 方法可以参考文档：<a href="https://www.matools.com/api/java8">https://www.matools.com/api/java8</a></strong></p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
